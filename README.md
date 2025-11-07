@@ -18,7 +18,7 @@ useEffect is implemented to persist data to localStorage everytime that todos is
 **Conditional Rendering**
 
 This app uses conditional rendering to toggle between what components render based off the values stored in the state.
-isEditing ? <edit> : <list>
+`isEditing ? <edit> : <list>`
 
 **Data Persistance**
 
@@ -29,23 +29,23 @@ changed / updated
 
 **Add Item**
 
-This function is defined as addTask().  This function creates a 'newTask' which will then be added to todos using setTodos.  This demonstrates
+This function is defined as `addTask()`.  This function creates a 'newTask' which will then be added to todos using setTodos.  This demonstrates
 immutability by never directly changing the value of the todos array.
 
 **Toggle Function / Complete Function**
 
-This function is defined as toggle(id:number).  It is designed to control the styling for a completed/non-completed task.  When this function is called, the element
+This function is defined as `toggle(id:number)`.  It is designed to control the styling for a completed/non-completed task.  When this function is called, the element
 isCompleted will be changed to !isCompleted allowing the user to go back and forth between the options.
 
 **Edit Item**
 
-This function is defined as openEditMode(id: number) and closeEditMode().  The reason why there are two functions is to create a wait until the submit button has been 
+This function is defined as `openEditMode(id: number)` and `closeEditMode()`.  The reason why there are two functions is to create a wait until the submit button has been 
 pressed by the user.  When openEditMode is called, there is a conditional render that will show the input fields for the edit.  Once submitted, the closeEditMode 
 function will be called and this is where the new value will be saved into todos.  Together, they demonstrate conditional UI rendering and controlled component logic.
 
 **Remove Item**
 
-This function is defined as deleteToDo(id: number).  This function is simple as it filters the todos and removes all elements that have input param: id.
+This function is defined as `deleteToDo(id: number)`.  This function is simple as it filters the todos and removes all elements that have input param: id.
 
 ## Project Structure
 
