@@ -7,11 +7,15 @@ export const ToDo = () => {
   //storing [] of types ToDo
   const [todos, setTodos] = useState<ToDoData[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
+  const [editValue, setEditValue] = useState<string>("");
+  const [editId, setEditId] = useState<number>();
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   // Log todos whenever they change
   useEffect(() => {
     console.log("Current todos:", todos);
-  }, [todos]);
+    console.log("EditValue: ", editValue);
+  }, [todos, editValue]);
 
   const addTask = () => {
     //check if input is empty
@@ -39,12 +43,23 @@ export const ToDo = () => {
     );
   };
 
-  const editToDo = (id: number) => {
+  const openEditMode = (id: number) => {
+    //go to edit mode
+    setIsEditing(true);
+    setEditId(id);
+  };
+
+  const closeEditMode = () => {
+    //changing the title value of Todo item
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+        todo.id === editId ? { ...todo, title: editValue } : todo
       )
     );
+
+    setEditValue('');
+
+    setIsEditing(false);
   };
 
   const deleteToDo = (id: number) => {
@@ -85,12 +100,35 @@ export const ToDo = () => {
       <hr className="border-t border-gray-200 mb-4" />
       {/* //render the list component now */}
       <div>
-        <ToDoList
-          data={todos}
-          toggle={toggle}
-          edit={editToDo}
-          deleteToDo={deleteToDo}
-        />
+        {isEditing ? (
+          <div className="mb-4 flex item-center bg-gray-200 rounded-full mt-4">
+            <input
+              type="text"
+              placeholder="Edit Task"
+              className="bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-7 placeholder:text-slate-600"
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  closeEditMode();
+                }
+              }}
+            />
+            <button
+              onClick={() => closeEditMode()}
+              className="border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointe"
+            >
+              Edit Task
+            </button>
+          </div>
+        ) : (
+          <ToDoList
+            data={todos}
+            edit={openEditMode}
+            toggle={toggle}
+            deleteToDo={deleteToDo}
+          />
+        )}
       </div>
     </div>
   );
