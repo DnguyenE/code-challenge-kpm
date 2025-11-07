@@ -22,6 +22,7 @@ export const ToDo = () => {
       id: Date.now(),
       title: inputValue.trim(),
       isCompleted: false,
+      isEditing: false,
     };
 
     //add
@@ -38,7 +39,13 @@ export const ToDo = () => {
     );
   };
 
-  const editToDo = (id: number) => {};
+  const editToDo = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    );
+  };
 
   const deleteToDo = (id: number) => {
     setTodos((prevTodos) => {

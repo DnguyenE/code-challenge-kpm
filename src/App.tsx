@@ -1,5 +1,4 @@
 import { ToDo } from "./components/ToDo";
-import type { ToDoData } from "./types";
 
 function App() {
   return (
