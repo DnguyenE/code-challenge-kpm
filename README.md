@@ -1,8 +1,19 @@
 # To Do Application in React using TypeScript - Ethan Dinh
 
-## React Compiler
+Task: Create a simple To-Do List Application.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Core Features
+
+All functions were created in ToDo.tsx as that is where the todos state is being held.  This makes it easier for child components to change any element in the todos list.
+
+**Add Item**
+
+This function is defined as addTask().  This function creates a 'newTask' which will then be added to todos using setTodos
+
+**Toggle Function**
+
+This function is designed to control the styling for a completed/non-completed task.  When this function is called, the element
+isCompleted will be changed to !isCompleted allowing the user to go back and forth between the options.
 
 ## Expanding the ESLint configuration
 
