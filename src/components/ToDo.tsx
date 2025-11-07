@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import todo_icon from "../assets/todo_icon.png";
 import type { ToDoData } from "../types";
 import ToDoList from "./ToDoList";
 
 export const ToDo = () => {
   //storing [] of types ToDo
-  const [todos, setTodos] = useState<ToDoData[]>([]);
+  const [todos, setTodos] = useState<ToDoData[]>(
+    () => {
+      const saved = localStorage.getItem("todos");
+      return saved ? JSON.parse(saved) : [];
+    }
+  );
   const [inputValue, setInputValue] = useState<string>("");
   const [editValue, setEditValue] = useState<string>("");
   const [editId, setEditId] = useState<number>();
@@ -13,9 +18,9 @@ export const ToDo = () => {
 
   // Log todos whenever they change
   useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
     console.log("Current todos:", todos);
-    console.log("EditValue: ", editValue);
-  }, [todos, editValue]);
+  }, [todos]);
 
   const addTask = () => {
     //check if input is empty
@@ -57,7 +62,7 @@ export const ToDo = () => {
       )
     );
 
-    setEditValue('');
+    setEditValue("");
 
     setIsEditing(false);
   };

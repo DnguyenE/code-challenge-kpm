@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import type { FC } from "react";
 import type { ToDoData } from "../types";
 import tick_icon from "../assets/tick.png";
 import notTick_icon from "../assets/not_tick.png";
@@ -12,12 +12,7 @@ export interface ToDoListProps {
   deleteToDo: (id: number) => void;
 }
 
-const ToDoList: FC<ToDoListProps> = ({
-  data,
-  toggle,
-  edit,
-  deleteToDo,
-}) => {
+const ToDoList: FC<ToDoListProps> = ({ data, toggle, edit, deleteToDo }) => {
   return (
     <div>
       {data.map((item) => (
