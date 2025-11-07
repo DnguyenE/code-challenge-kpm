@@ -10,7 +10,7 @@ All functions were created in ToDo.tsx as that is where the todos state is being
 
 This function is defined as addTask().  This function creates a 'newTask' which will then be added to todos using setTodos
 
-**Toggle Function / Complete Function **
+**Toggle Function / Complete Function**
 
 This function is defined as toggle(id:number).  It is designed to control the styling for a completed/non-completed task.  When this function is called, the element
 isCompleted will be changed to !isCompleted allowing the user to go back and forth between the options.
