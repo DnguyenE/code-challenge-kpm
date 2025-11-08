@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import todo_icon from "../assets/todo_icon.png";
+import { CalendarIcon } from "@heroicons/react/24/solid";
 import type { ToDoData } from "../types";
 import ToDoList from "./ToDoList";
 
 export const ToDo = () => {
   //storing [] of types ToDo
-  const [todos, setTodos] = useState<ToDoData[]>(
-    () => {
-      const saved = localStorage.getItem("todos");
-      return saved ? JSON.parse(saved) : [];
-    }
-  );
+  const [todos, setTodos] = useState<ToDoData[]>(() => {
+    const saved = localStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [inputValue, setInputValue] = useState<string>("");
   const [editValue, setEditValue] = useState<string>("");
   const [editId, setEditId] = useState<number>();
@@ -56,6 +54,8 @@ export const ToDo = () => {
 
   const closeEditMode = () => {
     //changing the title value of Todo item
+    if (editValue === "" || editValue === null) return;
+
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
         todo.id === editId ? { ...todo, title: editValue } : todo
@@ -75,18 +75,18 @@ export const ToDo = () => {
 
   return (
     // create the container to hold the table
-    <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl">
+    <div className="bg-[#1D1825] place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl">
       {/* header */}
       <div className="flex items-center mt-7 gap-3">
-        <img className="w-8" src={todo_icon} alt="" />
-        <h1 className="text-3xl font-semibold">ToDo App</h1>
+        <CalendarIcon className="size-10 text-white" />
+        <h1 className="text-white text-3xl font-semibold">ToDo App</h1>
       </div>
       {/* create the input field */}
-      <div className="mb-4 flex item-center bg-gray-200 rounded-full mt-4">
+      <div className="mb-4 flex item-center bg-transparent rounded-full mt-4">
         <input
           type="text"
           placeholder="Enter your task"
-          className="bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-7 placeholder:text-slate-600"
+          className="bg-transparent text-white border-0 outline-none flex-1 h-8 pl-6 pr-7 placeholder:text-[#777777]"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => {
@@ -97,33 +97,37 @@ export const ToDo = () => {
         />
         <button
           onClick={addTask}
-          className="border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointe"
+          className="border-none rounded-full bg-[#9E78CF] w-8 h-8 text-white text-lg font-medium cursor-pointe"
         >
-          Add Task!
+          +
         </button>
       </div>
       <hr className="border-t border-gray-200 mb-4" />
-      {/* //render the list component now */}
+      {/* //render the list / editing component now */}
       <div>
         {isEditing ? (
-          <div className="mb-4 flex item-center bg-gray-200 rounded-full mt-4">
+          <div className="mb-4 flex items-center bg-[#1D1825] border border-[#3E1671] rounded-full mt-4">
             <input
               type="text"
               placeholder="Edit Task"
-              className="bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-7 placeholder:text-slate-600"
+              className="bg-transparent text-white border-0 outline-none flex-1 h-14 pl-6 pr-4 placeholder:text-[#777777]"
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   closeEditMode();
+                } else if (e.key === "Escape") {
+                  setIsEditing(false);
+                  setEditValue("");
                 }
               }}
+              autoFocus
             />
             <button
               onClick={() => closeEditMode()}
-              className="border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointe"
+              className="border-none rounded-full bg-[#9E78CF] w-20 h-10 text-white text-sm font-medium cursor-pointer mr-2"
             >
-              Edit Task
+              Save
             </button>
           </div>
         ) : (

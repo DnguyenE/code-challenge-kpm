@@ -1,9 +1,23 @@
 import type { FC } from "react";
 import type { ToDoData } from "../types";
-import tick_icon from "../assets/tick.png";
-import notTick_icon from "../assets/not_tick.png";
-import delete_icon from "../assets/delete.png";
-import edit_icon from "../assets/edit.png";
+import {
+  TrashIcon,
+  PencilIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
+
+export const CircleIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    className="h-8 w-8 text-white"
+  >
+    <circle cx="12" cy="12" r="9" />
+  </svg>
+);
 
 export interface ToDoListProps {
   data: ToDoData[];
@@ -21,14 +35,17 @@ const ToDoList: FC<ToDoListProps> = ({ data, toggle, edit, deleteToDo }) => {
             onClick={() => toggle(item.id)}
             className="flex items-center cursor-pointer flex-1"
           >
-            <img
-              className="w-7 h-7"
-              src={item.isCompleted ? tick_icon : notTick_icon}
-              alt=""
-            />
+            {item.isCompleted ? (
+              <CheckCircleIcon className="size-8 text-white" />
+            ) : (
+              <CircleIcon />
+            )}
+
             <p
-              className={`ml-4 text-slate-700 text-[17px] ${
-                item.isCompleted ? "line-through text-gray-400" : ""
+              className={`ml-4 text-[17px] ${
+                item.isCompleted
+                  ? "line-through text-[#78CFB0]"
+                  : "text-[#9E78CF]"
               }`}
             >
               {item.title}
@@ -42,7 +59,7 @@ const ToDoList: FC<ToDoListProps> = ({ data, toggle, edit, deleteToDo }) => {
             className="p-1 hover:bg-gray-100 rounded"
             aria-label="Delete task"
           >
-            <img className="w-5 h-5" src={edit_icon} alt="Delete" />
+            <PencilIcon className="size-6 text-white" />
           </button>
           <button
             onClick={(e) => {
@@ -52,7 +69,7 @@ const ToDoList: FC<ToDoListProps> = ({ data, toggle, edit, deleteToDo }) => {
             className="p-1 hover:bg-gray-100 rounded"
             aria-label="Delete task"
           >
-            <img className="w-4 h-4" src={delete_icon} alt="Delete" />
+            <TrashIcon className="size-6 text-white" />
           </button>
         </div>
       ))}
