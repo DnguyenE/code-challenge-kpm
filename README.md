@@ -2,6 +2,8 @@
 
 This is a simple yet functional To Do List application build with React and TypeScript.  This app demonstrates key concepts in React development including: state management with hooks, component composition, event handling, and conditional rendering.
 
+**Live Demo**: [here](https://code-challenge-kpm.vercel.app)
+
 ## Core Concepts and Features
 
 **Component Based Architecture**
