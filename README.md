@@ -8,14 +8,14 @@ This is a simple yet functional To Do List application build with React and Type
 
 **Component Based Architecture**
 
-The main component, ToDo.tsx is the parent component maintaining all of the apps states and logic.
-ToDoList.tsx is stateless and receives props from the parent allowed for good data flow
+The main component, `ToDo.tsx` is the parent component maintaining all of the apps states and logic.
+`ToDoList.tsx` is stateless and receives props from the parent allowed for good data flow
 
 **State Management**
 
-useState hooks are used to store and update different states in the application.  
+`useState` hooks are used to store and update different states in the application.  
 
-useEffect is implemented to persist data to localStorage everytime that todos is updated (the dependency array)
+`useEffect` is implemented to persist data to localStorage everytime that todos is updated (the dependency array)
 
 **Conditional Rendering**
 
@@ -24,7 +24,7 @@ This app uses conditional rendering to toggle between what components render bas
 
 **Data Persistance**
 
-Since updating the localStorage is a side effect, I decided to use a useEffect to synchronize the data between localStorage and the state only when the state is 
+Since updating the `localStorage` is a side effect, I decided to use a `useEffect` to synchronize the data between `localStorage` and the state only when the state is 
 changed / updated
 
 ## Core Functions
